@@ -1,0 +1,1 @@
+console.log("This is auth package for the repo :)")
