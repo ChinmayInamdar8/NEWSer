@@ -1,0 +1,12 @@
+import { Body, Controller, Post } from '@nestjs/common';
+
+@Controller('auth')
+export class AuthController {
+    @Post('login')
+    login(@Body() body:{email:string, password:string}){
+        return {
+            message:"Login successful",
+            email:body.email
+        }
+    }
+}

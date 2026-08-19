@@ -31,40 +31,51 @@ corepack enable
 corepack prepare pnpm@10.33.4 --activate
 ```
 
-## 4. Install dependencies
+## 4. One-command setup (recommended)
 
-Run this once from the repo root — it installs and links every app and package declared in `pnpm-workspace.yaml` (`apps/*` and `packages/*`):
+After cloning, copy env templates and put a real Postgres URL in `packages/database/.env`, then run:
 
 ```bash
-pnpm install
+pnpm run setup
 ```
+
+> Use `pnpm run setup` (not `pnpm setup`). Plain `pnpm setup` is a pnpm CLI command that configures pnpm itself.
+
+This will:
+
+1. Create missing `.env` files from each workspace's `example.env`
+2. Validate required env vars (especially `DATABASE_URL`)
+3. Run `pnpm install`
+4. Check the database connection
+5. Apply Prisma migrations (`db:deploy`)
+6. Generate the Prisma client
 
 Do **not** run `pnpm install` inside individual `apps/*` or `packages/*` folders; the workspace is resolved from the root.
 
-## 5. Configure environment variables
+## 5. Configure environment variables (manual)
 
-The `@repo/db` package (`packages/database`) needs a Postgres connection string. Create a `.env` file there (it is git-ignored and must never be committed):
+Each app/package has an `example.env`. The setup script copies these to `.env` when missing. At minimum you must set a real connection string:
 
 ```bash
 # packages/database/.env
 DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE_NAME"
 ```
 
-If any app or package later requires its own secrets (e.g. NextAuth secrets for `@repo/auth`), add a local `.env` next to that package/app following the same pattern, and document the required keys in that package's README.
+If any app or package later requires its own secrets (e.g. NextAuth secrets for `@repo/auth`), fill them in that package's `.env` (from its `example.env`).
 
-## 6. Set up the database
+## 6. Database commands (manual)
 
-All Prisma commands live on the `@repo/db` package and are exposed as scripts:
+All Prisma commands live on the `@workspace/db` package:
 
 ```bash
 # Generate the Prisma client into packages/database/generated
-pnpm --filter @repo/db db:generate
+pnpm --filter @workspace/db db:generate
 
-# Create/apply migrations against your local database
-pnpm --filter @repo/db db:migrate
+# Create/apply migrations interactively (local development)
+pnpm --filter @workspace/db db:migrate
 
-# Apply existing migrations without prompting (e.g. CI/production)
-pnpm --filter @repo/db db:deploy
+# Apply existing migrations without prompting (setup / CI / production)
+pnpm --filter @workspace/db db:deploy
 ```
 
 You can also run these from Turborepo directly:
@@ -122,7 +133,8 @@ packages/
 
 - **`pnpm install` fails on engines check** — confirm `node -v` reports `20.x` or newer.
 - **Prisma commands fail to connect** — confirm `DATABASE_URL` in `packages/database/.env` is correct and the database is reachable.
-- **Type errors after pulling new changes** — run `pnpm --filter @repo/db db:generate` again; the Prisma client is generated code and is not committed to git.
+- **Type errors after pulling new changes** — run `pnpm --filter @workspace/db db:generate` again; the Prisma client is generated code and is not committed to git.
+- **`pnpm setup` does nothing useful for this repo** — that is pnpm's own CLI. Use `pnpm run setup` instead.
 - **Wrong pnpm version** — re-run `corepack prepare pnpm@10.33.4 --activate`; mismatched package managers can produce a different lockfile/hoisting layout.
 
 See [`docs/instructions.md`](./instructions.md) for the coding standards to follow once your environment is set up.
