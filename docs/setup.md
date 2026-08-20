@@ -137,4 +137,4 @@ packages/
 - **`pnpm setup` does nothing useful for this repo** — that is pnpm's own CLI. Use `pnpm run setup` instead.
 - **Wrong pnpm version** — re-run `corepack prepare pnpm@10.33.4 --activate`; mismatched package managers can produce a different lockfile/hoisting layout.
 
-See [`docs/instructions.md`](./instructions.md) for the coding standards to follow once your environment is set up.
+See [`docs/instructions.md`](./instructions.md) for the coding standards to follow once your environment is set up. See [`docs/redux.md`](./redux.md) for Redux Toolkit and RTK Query conventions.
