@@ -11,6 +11,7 @@ export const api = createApi({
     "Post",
     "User",
     "Comment",
+    "Health"
   ],
 
   endpoints: () => ({}),
