@@ -1,21 +1,11 @@
 "use client"
 
-import Link from "next/link"
-import { Button } from "@workspace/ui/components/button"
 import { GoogleSignInButton } from "@/components/google-sign-in-button"
 import { useSession } from "@/lib/use-session"
 
-export default function Page() {
+export default function LoginPage() {
   const { user, loading } = useSession()
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000"
-
-  async function logout() {
-    await fetch(`${apiBaseUrl.replace(/\/$/, "")}/auth/logout`, {
-      method: "POST",
-      credentials: "include",
-    })
-    window.location.reload()
-  }
 
   return (
     <main className="relative flex min-h-svh items-center justify-center overflow-hidden bg-muted/50 p-6">
@@ -26,32 +16,26 @@ export default function Page() {
             Daily Corner
           </h1>
           <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-            Discover and discuss news with the community.
+            Sign in to follow news, join the conversation, and build your feed.
           </p>
         </div>
+
         {loading ? (
           <p className="text-muted-foreground text-center text-sm">
-            Loading session…
+            Checking session…
           </p>
         ) : user ? (
-          <div className="flex flex-col items-center gap-4 text-center">
-            <p className="text-sm">
-              Signed in as{" "}
-              <span className="font-medium">{user.name ?? user.email}</span>
-            </p>
-            <Button type="button" variant="outline" onClick={() => void logout()}>
-              Log out
-            </Button>
-          </div>
+          <p className="text-center text-sm">
+            You are signed in as{" "}
+            <span className="font-medium">{user.name ?? user.email}</span>.
+          </p>
         ) : (
           <div className="flex flex-col items-center gap-4">
             <GoogleSignInButton client="web" apiBaseUrl={apiBaseUrl} />
-            <Link
-              href="/login"
-              className="text-muted-foreground text-center text-xs underline-offset-4 hover:underline"
-            >
-              Open sign in page
-            </Link>
+            <p className="text-muted-foreground text-center text-xs leading-relaxed">
+              Reporter accounts are requested separately after you have a
+              member login.
+            </p>
           </div>
         )}
       </section>

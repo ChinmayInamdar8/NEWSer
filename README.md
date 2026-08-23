@@ -1,6 +1,6 @@
-# 📰 NEWSer
+# 📰 Daily Corner
 
-**NEWSer** is a modern social media platform focused on news. It allows users to discover, share, discuss, and engage with news from around the world in a clean, fast, and community-driven environment.
+**Daily Corner** is a modern social media platform focused on news. It allows users to discover, share, discuss, and engage with news from around the world in a clean, fast, and community-driven environment.
 
 > **Status:** 🚧 Under Development
 
@@ -11,6 +11,7 @@
 Before contributing to the project, please read the following documentation:
 
 * **Project Setup:** [docs/setup.md](docs/setup.md)
+* **Google OAuth & sessions:** [docs/auth-google-oauth.md](docs/auth-google-oauth.md)
 * **Development & Pull Request Guidelines:** [docs/instructions.md](docs/instructions.md)
 
 ---
@@ -51,7 +52,7 @@ Before contributing to the project, please read the following documentation:
 
 ### Authentication
 
-* NextAuth.js
+* Passport.js + Google OAuth (NestJS)
 
 ### Development Tools
 
@@ -66,7 +67,7 @@ Before contributing to the project, please read the following documentation:
 ## 📁 Project Structure
 
 ```text
-NEWSer/
+Daily Corner/
 ├── apps/
 │   ├── admin/        # Admin Dashboard
 │   ├── web/          # User-facing application
@@ -145,4 +146,4 @@ This project is licensed under the MIT License.
 
 ## 👨‍💻 Authors
 
-Developed with ❤️ by the **NEWSer Team**.
+Developed with ❤️ by the **Daily Corner Team**.

@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
+import { ThemeToggle } from "@workspace/ui/components/theme-toggle"
 
 function ThemeProvider({
   children,
@@ -17,6 +18,7 @@ function ThemeProvider({
     >
       <ThemeHotkey />
       {children}
+      <ThemeToggle />
     </NextThemesProvider>
   )
 }
