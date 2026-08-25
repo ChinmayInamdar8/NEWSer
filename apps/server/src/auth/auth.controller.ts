@@ -36,18 +36,9 @@ export class AuthController {
     @Res() res: Response,
   ) {
     const user = req.user as SessionUser;
-    const webOrigin =
-      this.config.get<string>('WEB_ORIGIN') ?? 'http://localhost:3000';
-    const adminOrigin =
-      this.config.get<string>('ADMIN_ORIGIN') ?? 'http://localhost:3001';
-    const state = Array.isArray(req.query.state)
-      ? req.query.state[0]
-      : req.query.state;
-    const fromAdmin = state === 'admin';
+    const webOrigin =   this.config.getOrThrow<string>('WEB_ORIGIN')
+    const adminOrigin = this.config.getOrThrow<string>('ADMIN_ORIGIN')
 
-    if (fromAdmin && user.role !== 'ADMIN') {
-      return res.redirect(`${adminOrigin}/login?error=forbidden`);
-    }
 
     const token = await this.authService.signAccessToken(user);
 
@@ -56,10 +47,10 @@ export class AuthController {
       sameSite: 'lax',
       secure: this.config.get('NODE_ENV') === 'production',
       path: '/',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000, // this should be taken from the env file not hard-coded
     });
 
-    return res.redirect(fromAdmin ? adminOrigin : webOrigin);
+    return res.redirect(this.authService.adminEmail()===user.email ? adminOrigin : webOrigin);
   }
 
   @Get('me')

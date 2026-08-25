@@ -1,4 +1,3 @@
-import "./load-env";
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import cookieParser from 'cookie-parser';
@@ -9,9 +8,9 @@ async function bootstrap() {
   const config = app.get(ConfigService);
 
   const webOrigin =
-    config.get<string>('WEB_ORIGIN') ?? 'http://localhost:3000';
+    config.getOrThrow<string>('WEB_ORIGIN') ;
   const adminOrigin =
-    config.get<string>('ADMIN_ORIGIN') ?? 'http://localhost:3001';
+    config.getOrThrow<string>('ADMIN_ORIGIN') ;
 
   app.use(cookieParser());
   app.enableCors({
@@ -19,7 +18,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  const port = Number(config.get('PORT') ?? 4000);
+  const port = Number(config.getOrThrow('PORT'));
   await app.listen(port);
 }
 bootstrap();

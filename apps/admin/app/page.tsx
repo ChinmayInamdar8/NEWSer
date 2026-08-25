@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { useGetPostsQuery } from "@/lib/services/api/posts"
 import { useGetMeQuery, useLogoutMutation } from "@/lib/services/api/auth"
 import { Button } from "@workspace/ui/components/button"
@@ -16,7 +16,7 @@ export default function Page() {
   useEffect(() => {
     if (sessionLoading) return
     if (!isAdmin) {
-      router.replace("/login")
+      redirect(process.env.NEXT_PUBLIC_WEB_APP_URL!)
     }
   }, [isAdmin, router, sessionLoading])
 
@@ -40,7 +40,7 @@ export default function Page() {
     <div className="flex min-h-svh p-6">
       <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
         <div>
-          <h1 className="font-medium">Admin ready!</h1>
+          <h1 className="text-2xl text-center font-medium">Admin</h1>
           <p>You may now add components and start building.</p>
           <p>Shared UI is wired through @workspace/ui.</p>
           <div className="mt-2 flex flex-wrap items-center gap-2">
@@ -49,7 +49,7 @@ export default function Page() {
                 type="button"
                 variant="outline"
                 onClick={() => {
-                  void logout().then(() => router.replace("/login"))
+                  void logout().then(() => redirect(process.env.NEXT_PUBLIC_WEB_APP_URL!))
                 }}
               >
               Log out

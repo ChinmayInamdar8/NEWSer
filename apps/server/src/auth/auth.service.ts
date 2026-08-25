@@ -16,7 +16,6 @@ export type JwtPayload = {
   role: SessionUser['role'];
 };
 
-const DEFAULT_ADMIN_EMAIL = 'info@dailycorner.in';
 
 @Injectable()
 export class AuthService {
@@ -25,9 +24,9 @@ export class AuthService {
     private readonly config: ConfigService,
   ) {}
 
-  private adminEmail(): string {
+  adminEmail(): string {
     return (
-      this.config.get<string>('ADMIN_EMAIL') ?? DEFAULT_ADMIN_EMAIL
+      this.config.getOrThrow<string>('ADMIN_EMAIL')
     ).trim().toLowerCase();
   }
 
