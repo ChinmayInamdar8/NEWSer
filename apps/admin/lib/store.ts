@@ -3,14 +3,6 @@ import {api} from '@/lib/services/api/api'
 import '@/lib/services/api/auth'
 import '@/lib/services/api/posts'
 
-// const store = configureStore({
-//   reducer: {
-//     // add reducers here
-//     [api.reducerPath] : api.reducer
-//   },
-//   middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat(api.middleware)
-// });
-
 export const makeStore = ()=>{
   return configureStore({
     reducer:{
