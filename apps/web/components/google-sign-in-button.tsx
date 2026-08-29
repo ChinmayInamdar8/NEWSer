@@ -3,6 +3,7 @@
 import { googleAuthUrl, type AuthClient } from "@workspace/auth"
 import { buttonVariants } from "@workspace/ui/components/button"
 import { cn } from "@workspace/ui/lib/utils"
+import { useTranslations } from "next-intl"
 
 function GoogleMark() {
   return (
@@ -35,6 +36,7 @@ export function GoogleSignInButton({
   apiBaseUrl: string
 }) {
   const href = googleAuthUrl(apiBaseUrl, client)
+  const t = useTranslations("auth")
 
   return (
     <a
@@ -45,7 +47,7 @@ export function GoogleSignInButton({
       href={href}
     >
       <GoogleMark />
-      Continue with Google
+      {t("continueWithGoogle")}
     </a>
   )
 }

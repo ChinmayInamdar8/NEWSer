@@ -61,7 +61,7 @@ Each app/package has an `example.env`. The setup script copies these to `.env` w
 DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE_NAME"
 ```
 
-If any app or package later requires its own secrets (e.g. Google OAuth client ID/secret and `JWT_SECRET` for `apps/server`), fill them in that workspace's `.env` (from its `example.env`). Full Google OAuth, cookie, and admin-email behavior is documented in [auth-google-oauth.md](./auth-google-oauth.md).
+If any app or package later requires its own secrets (e.g. Google OAuth client ID/secret and `JWT_SECRET` for `apps/server`), fill them in that workspace's `.env` (from its `example.env`). Full Google OAuth, cookie, and admin-email behavior is documented in [auth-google-oauth.md](./auth-google-oauth.md). Web English/Marathi routing is documented in [i18n.md](./i18n.md).
 
 ## 6. Database commands (manual)
 

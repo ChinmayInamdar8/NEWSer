@@ -1,13 +1,14 @@
 "use client"
 
-import Link from "next/link"
-import { Button } from "@workspace/ui/components/button"
-import { GoogleSignInButton } from "@/components/google-sign-in-button"
-import { useSession } from "@/lib/use-session"
+import { useTranslations } from "next-intl"
 import { useEffect } from "react"
-import { redirect } from "next/navigation"
+import { Button, buttonVariants } from "@workspace/ui/components/button"
+import { cn } from "@workspace/ui/lib/utils"
+import { Link } from "@/i18n/navigation"
+import { useSession } from "@/lib/use-session"
 
 export default function Page() {
+  const t = useTranslations("home")
   const { user, loading } = useSession()
   const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL!!
 
@@ -19,11 +20,11 @@ export default function Page() {
     window.location.reload()
   }
 
-  useEffect(()=>{
-    if(user?.role==='ADMIN'){
-      redirect(process.env.NEXT_PUBLIC_ADMIN_URL!!)
+  useEffect(() => {
+    if (user?.role === "ADMIN") {
+      window.location.assign(process.env.NEXT_PUBLIC_ADMIN_URL!!)
     }
-  }, [user]);
+  }, [user])
 
   return (
     <main className="relative flex min-h-svh items-center justify-center overflow-hidden bg-muted/50 p-6">
@@ -31,34 +32,32 @@ export default function Page() {
       <section className="relative w-full max-w-md rounded-2xl border border-border/80 bg-card/90 p-8 shadow-xl backdrop-blur-sm">
         <div className="mb-8 flex flex-col items-center text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
-            Daily Corner
+            DAILY CORNER
           </h1>
           <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-            Discover and discuss news with the community.
+            {t("tagline")}
           </p>
         </div>
         {loading ? (
           <p className="text-muted-foreground text-center text-sm">
-            Loading session…
+            {t("loadingSession")}
           </p>
         ) : user ? (
           <div className="flex flex-col items-center gap-4 text-center">
             <p className="text-sm">
-              Signed in as{" "}
-              <span className="font-medium">{user.name ?? user.email}</span>
+              {t("signedInAs", { name: user.name ?? user.email })}
             </p>
             <Button type="button" variant="outline" onClick={() => void logout()}>
-              Log out
+              {t("logOut")}
             </Button>
           </div>
         ) : (
-          <div className="flex flex-col items-center gap-4">
-            <GoogleSignInButton client="web" apiBaseUrl={apiBaseUrl} />
+          <div className="flex justify-center">
             <Link
               href="/login"
-              className="text-muted-foreground text-center text-xs underline-offset-4 hover:underline"
+              className={cn(buttonVariants({ size: "lg" }), "h-11 px-5")}
             >
-              Open sign in page
+              {t("signIn")}
             </Link>
           </div>
         )}

@@ -12,6 +12,7 @@ Before contributing to the project, please read the following documentation:
 
 * **Project Setup:** [docs/setup.md](docs/setup.md)
 * **Google OAuth & sessions:** [docs/auth-google-oauth.md](docs/auth-google-oauth.md)
+* **Web language translation (English / Marathi):** [docs/i18n.md](docs/i18n.md)
 * **Development & Pull Request Guidelines:** [docs/instructions.md](docs/instructions.md)
 
 ---

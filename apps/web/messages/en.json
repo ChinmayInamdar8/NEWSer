@@ -1,0 +1,26 @@
+{
+  "brand": {
+    "name": "Daily Corner"
+  },
+  "common": {
+    "language": "Language",
+    "english": "English",
+    "marathi": "मराठी"
+  },
+  "home": {
+    "tagline": "Discover and discuss news with the community.",
+    "loadingSession": "Loading session…",
+    "signedInAs": "Signed in as {name}.",
+    "logOut": "Log out",
+    "signIn": "Sign in"
+  },
+  "login": {
+    "tagline": "Sign in to follow news, join the conversation, and build your feed.",
+    "checkingSession": "Checking session…",
+    "signedInAs": "You are signed in as {name}.",
+    "reporterNote": "Reporter accounts are requested separately after you have a member login."
+  },
+  "auth": {
+    "continueWithGoogle": "Continue with Google"
+  }
+}
