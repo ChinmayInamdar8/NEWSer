@@ -1,6 +1,6 @@
 # Setup Guide
 
-This guide walks through cloning the **NEWSer** repository from GitHub and getting the full Turborepo monorepo (apps + shared packages) running locally.
+This guide walks through cloning the **Daily Corner** repository from GitHub and getting the full Turborepo monorepo (apps + shared packages) running locally.
 
 ## 1. Prerequisites
 
@@ -61,7 +61,7 @@ Each app/package has an `example.env`. The setup script copies these to `.env` w
 DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE_NAME"
 ```
 
-If any app or package later requires its own secrets (e.g. NextAuth secrets for `@repo/auth`), fill them in that package's `.env` (from its `example.env`).
+If any app or package later requires its own secrets (e.g. Google OAuth client ID/secret and `JWT_SECRET` for `apps/server`), fill them in that workspace's `.env` (from its `example.env`). Full Google OAuth, cookie, and admin-email behavior is documented in [auth-google-oauth.md](./auth-google-oauth.md).
 
 ## 6. Database commands (manual)
 
@@ -93,7 +93,7 @@ Start every app in dev mode (with hot reload) in parallel:
 pnpm dev
 ```
 
-This runs the `dev` task through Turborepo, which is marked `persistent`/non-cached in `turbo.json`. By default Next.js will bind to `http://localhost:3000` and automatically pick the next free port (e.g. `3001`) for the second app — check your terminal output for the exact URLs.
+This runs the `dev` task through Turborepo, which is marked `persistent`/non-cached in `turbo.json`. `web` binds to `http://localhost:3000`, `admin` to `http://localhost:3001`, and `server` to `http://localhost:4000`.
 
 To run a single app instead:
 
@@ -122,8 +122,8 @@ apps/
 
 packages/
   database/            @repo/db      Prisma schema, migrations & generated client
-  auth/                @repo/auth    Authentication logic (NextAuth)
-  types/               @repo/types   Shared TypeScript types / zod schemas
+  auth/                @workspace/auth Shared cookie name and Google login URLs
+  types/               @workspace/types Shared TypeScript types / zod schemas
   ui/                  @workspace/ui               Shared shadcn/ui component library
   eslint-config/       @workspace/eslint-config     Shared ESLint flat configs
   typescript-config/   @workspace/typescript-config Shared tsconfig base configs

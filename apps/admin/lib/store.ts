@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {api} from '@/lib/services/api/api'
-import { setupListeners } from '@reduxjs/toolkit/query';
+import '@/lib/services/api/auth'
+import '@/lib/services/api/posts'
 
 export const makeStore = ()=>{
   return configureStore({

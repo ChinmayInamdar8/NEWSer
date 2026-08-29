@@ -1,15 +1,12 @@
 {
-  "name": "types",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@workspace/types",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared TypeScript types and Zod schemas.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "typecheck": "tsc --noEmit"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.33.4",
   "exports": {
     ".": "./src/index.ts"
   },

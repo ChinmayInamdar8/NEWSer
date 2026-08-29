@@ -1,12 +1,24 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
-  "globalEnv": ["DATABASE_URL"], 
+  "globalEnv": [
+    "DATABASE_URL",
+    "PORT",
+    "NODE_ENV",
+    "JWT_SECRET",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+    "GOOGLE_CALLBACK_URL",
+    "WEB_ORIGIN",
+    "ADMIN_ORIGIN",
+    "NEXT_PUBLIC_API_URL",
+    "NEXT_PUBLIC_APP_URL"
+  ], 
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -18,6 +30,7 @@
       "dependsOn": ["^typecheck"]
     },
     "dev": {
+      "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     },
