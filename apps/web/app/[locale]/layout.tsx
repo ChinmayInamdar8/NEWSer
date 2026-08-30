@@ -1,6 +1,6 @@
 import { hasLocale } from "next-intl"
 import { NextIntlClientProvider } from "next-intl"
-import { getMessages, setRequestLocale } from "next-intl/server"
+import { getMessages } from "next-intl/server"
 import { notFound } from "next/navigation"
 
 import { ThemeProvider } from "@/components/theme-provider"
