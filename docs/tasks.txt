@@ -1,0 +1,10 @@
+1. create a preference table                                                --DONE
+2. create a userPreference table                                            --DONE
+3. create api's for crud of the preference                                  --Pending
+4. create a page in the admin for crud of preference                        --Pending
+5. create api's for crud of the userPreference                              --Pending
+6. create a  page for crud of userPreference                                --Pending
+7. create a table called reportorForm                                       --Pending
+8. create a page to select between reporter and a user                      --Pending
+9. create a page to fill reporter reportor in the web                       --Pending
+10. create a page in the admin to verify the reporter's filled form.        --Pending

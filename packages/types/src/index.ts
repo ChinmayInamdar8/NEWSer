@@ -14,3 +14,5 @@ export const sessionUserSchema = z.object({
 export type UserRole = z.infer<typeof userRoleSchema>
 export type UserStatus = z.infer<typeof userStatusSchema>
 export type SessionUser = z.infer<typeof sessionUserSchema>
+
+export * from './preference.js'

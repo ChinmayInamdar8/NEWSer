@@ -34,4 +34,34 @@ model User {
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   lastLoginAt DateTime?
+
+  UserPrefrence UserPrefrence[] 
+}
+
+model Preference{
+  id String @id @default(cuid())
+  name String @unique
+  slug String @unique
+  is_active Boolean?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  UserPrefrence UserPrefrence[]
+
+  @@index([name])
+  @@index([id])
+}
+
+model UserPrefrence{
+  id String @id @default(cuid())
+  userId String
+  preferenceId String
+
+  createdAt DateTime @default(now())
+
+  User User @relation(fields: [userId], references: [id])
+  Preference Preference @relation(fields: [preferenceId], references: [id])
+
+  @@index([userId, preferenceId])
 }
