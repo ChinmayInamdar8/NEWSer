@@ -223,15 +223,15 @@ importers:
 
   apps/web:
     dependencies:
+      '@reduxjs/toolkit':
+        specifier: ^2.12.0
+        version: 2.12.0(react-redux@9.3.0(@types/react@19.2.15)(react@19.2.4)(redux@5.0.1))(react@19.2.4)
       '@workspace/auth':
         specifier: workspace:*
         version: link:../../packages/auth
       '@workspace/types':
         specifier: workspace:*
         version: link:../../packages/types
-      '@reduxjs/toolkit':
-        specifier: ^2.12.0
-        version: 2.12.0(react-redux@9.3.0(@types/react@19.2.15)(react@19.2.4)(redux@5.0.1))(react@19.2.4)
       '@workspace/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -279,7 +279,17 @@ importers:
         specifier: ^5
         version: 5.9.3
 
-  packages/auth: {}
+  packages/auth:
+    devDependencies:
+      '@types/node':
+        specifier: ^24.0.0
+        version: 24.13.3
+      '@workspace/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      typescript:
+        specifier: ^5
+        version: 5.9.3
 
   packages/database:
     dependencies:
@@ -356,6 +366,16 @@ importers:
       zod:
         specifier: ^4.4.3
         version: 4.4.3
+    devDependencies:
+      '@types/node':
+        specifier: ^24.0.0
+        version: 24.13.3
+      '@workspace/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      typescript:
+        specifier: ^5
+        version: 5.9.3
 
   packages/typescript-config: {}
 
